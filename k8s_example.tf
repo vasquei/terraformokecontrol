@@ -32,7 +32,8 @@ resource "kubernetes_deployment" "nginx" {
       spec {
         container {
           name  = "nginx"
-          image = "nginx:1.27"
+          image = "docker.io/library/nginx:1.27.0"
+          image_pull_policy = "IfNotPresent"
           port {
             container_port = 80
           }
