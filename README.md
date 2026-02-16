@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository demonstrates how to integrate **Terraform Cloud** with **Oracle Cloud Infrastructure (OCI)** to manage Kubernetes resources inside an existing **Oracle Kubernetes Engine (OKE)** cluster.
+This documentation demonstrates how to integrate **Terraform Cloud** with **Oracle Cloud Infrastructure (OCI)** to manage Kubernetes resources inside an existing **Oracle Kubernetes Engine (OKE)** cluster.
 
 The goal of this project is to provision Kubernetes objects (a namespace and an Nginx deployment) from Terraform Cloud using secure, dynamic authentication without relying on a static kubeconfig file.
 
