@@ -37,8 +37,6 @@ For this project:
 
 
 
-
-
 Benefits:
 
 - No private key files stored on disk
@@ -51,8 +49,114 @@ Benefits:
 
 Terraform retrieves OKE cluster information using:
 
-```hcl
+```
 data "oci_containerengine_cluster_kube_config" "oke" {
   cluster_id = var.cluster_id
 }
+
+locals {
+    kubeconfig_yaml = data.oci_containerengine_cluster_kube_config.this.content
+    kubeconfig = yamldecode(local.kubeconfig_yaml)
+    
+    cluster_entry = local.kubeconfig.cluster[0].cluster
+    
+    host = local.cluster_entry.server
+    cluster_ca_certificate = base64decode(local.cluster_entry["certificate-authority-data"])
+}
+
+```
+
+Terraform dynamically extracts:
+
+- Kubernetes API Server endpoint
+
+- Certificate Authority data (base64 decoded)
+
+Benefits:
+
+- No static kubeconfig file required
+
+- No manual certificate management
+
+- Fully Infrastructure-as-Code
+
+### Issues Identified
+
+**Terraform Cloud Hosted Runners Cannot Authenticate to OKE**
+
+OKE authentication requires executing:
+
+```
+oci ce cluster generate-token
+
+```
+Limitations:
+
+- Terraform Cloud hosted runners do not include OCI CLI
+
+- Token cannot be generated
+
+- Kubernetes provider authentication fails
+
+Result:
+
+Terraform Cloud cannot connect directly to OKE when using hosted runners.
+
+### Solution
+
+**Terraform Cloud Agent Deployed Inside OCI**
+
+A Terraform Cloud Agent was installed on a Virtual Machine inside OCI with:
+
+- OCI CLI installed
+
+- ~/.oci/config properly configured
+
+- Private key with correct permissions
+
+- Network access to OKE cluster
+
+**Authentication Flow**
+
+- Terraform Cloud sends execution to the Agent
+
+- Agent runs Terraform inside OCI
+
+- Agent executes oci ce cluster generate-token
+
+- Temporary token is generated
+
+- Terraform authenticates successfully to OKE
+
+Benefits:
+
+Dynamic token-based authentication
+
+No persistent kubeconfig
+
+Secure execution
+
+### Architecture
+Terraform Cloud
+      |
+      v
+Terraform Cloud Agent (VM in OCI)
+      |
+      v
+Oracle Cloud Infrastructure (OCI)
+      |
+      v
+Oracle Kubernetes Engine (OKE)
+
+### Demo Result
+- Namespace apps created successfully
+
+- Nginx deployment created successfully
+
+- Resources provisioned from Terraform Cloud
+
+- Code stored in GitHub
+
+- Authentication fully dynamic
+
 
