@@ -33,6 +33,9 @@ For this project:
 - `private_key` is used
 - The private key is stored as a **sensitive variable** in Terraform Cloud
 
+  <img width="1249" height="82" alt="private_key" src="images/private_key.png" />
+
+
 
 
 
