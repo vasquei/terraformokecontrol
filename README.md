@@ -137,16 +137,8 @@ No persistent kubeconfig
 Secure execution
 
 ### Architecture
-Terraform Cloud
-      |
-      v
-Terraform Cloud Agent (VM in OCI)
-      |
-      v
-Oracle Cloud Infrastructure (OCI)
-      |
-      v
-Oracle Kubernetes Engine (OKE)
+
+<img width="400" height="800" alt="private_key" src="images/terraform-oke-architecture-transparent.png" />
 
 ### Demo Result
 - Namespace apps created successfully
