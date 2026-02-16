@@ -128,6 +128,11 @@ A Terraform Cloud Agent was installed on a Virtual Machine inside OCI with:
 
 - Terraform authenticates successfully to OKE
 
+  <img width="800" height="400" alt="private_key" src="images/agent_terraform_cloud.png" />
+
+  <img width="800" height="200" alt="private_key" src="images/agent_visualization.png" />
+  
+
 Benefits:
 
 Dynamic token-based authentication
@@ -135,6 +140,8 @@ Dynamic token-based authentication
 No persistent kubeconfig
 
 Secure execution
+
+
 
 ### Architecture
 
@@ -150,5 +157,16 @@ Secure execution
 - Code stored in GitHub
 
 - Authentication fully dynamic
+
+
+<img width="800" height="400" alt="private_key" src="images/all_sistems_created.png" />
+
+---
+
+## Author
+
+**Ivan Vasquez**  
+LAD A-Team Cloud Solution Specialist  
+Oracle Cloud Infrastructure (OCI)
 
 
