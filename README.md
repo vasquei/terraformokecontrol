@@ -138,7 +138,7 @@ Secure execution
 
 ### Architecture
 
-<img width="400" height="800" alt="private_key" src="images/terraform-oke-architecture-transparent.png" />
+<img width="400" height="800" alt="private_key" src="images/terraform-oke-architecture.png" />
 
 ### Demo Result
 - Namespace apps created successfully
